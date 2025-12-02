@@ -35,3 +35,31 @@ create table berita(
     status varchar(50) default 'draft',
     created_at TIMESTAMP DEFAULT NOW()
 );
+
+CREATE TABLE lokasi (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    jalan VARCHAR(255) NOT NULL,
+    desa VARCHAR(100),
+    kecamatan VARCHAR(100),
+    kabupaten VARCHAR(100),
+    kodepos VARCHAR(10),
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE setor ( 
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    lokasi_id INTEGER REFERENCES lokasi(id), 
+    catatan_tambahan TEXT, 
+    tanggal_setor TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE detail_setor (
+    id SERIAL PRIMARY KEY,
+    setor_id INTEGER REFERENCES setor(id) ON DELETE CASCADE, 
+    product_id INTEGER REFERENCES produk(id), 
+    kuantitas NUMERIC(10, 2) NOT NULL, 
+    harga_saat_transaksi NUMERIC(10, 2) NOT NULL 
+);
+
