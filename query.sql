@@ -1,0 +1,79 @@
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(100) UNIQUE NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  role VARCHAR(50) DEFAULT 'user',
+  avatar_url TEXT,
+  address TEXT,
+  phone VARCHAR(50),
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+
+create table kategori(
+	id serial primary key,
+	name varchar(255) not null
+);
+
+create table produk(
+  id serial primary key,
+  nama_produk varchar(255) not null,
+  harga numeric not null,
+  deskripsi text,
+  image_url text,
+  jenis varchar(255),
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+create table berita(
+    id serial primary key,
+    judul varchar(255) not null,
+    konten text not null,
+    image_url text,
+    author varchar(100),
+    status varchar(50) default 'draft',
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE lokasi (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    jalan VARCHAR(255) NOT NULL,
+    desa VARCHAR(100),
+    kecamatan VARCHAR(100),
+    kabupaten VARCHAR(100),
+    kodepos VARCHAR(10),
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE setor ( 
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    lokasi_id INTEGER REFERENCES lokasi(id), 
+    catatan_tambahan TEXT, 
+    tanggal_setor TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE detail_setor (
+    id SERIAL PRIMARY KEY,
+    setor_id INTEGER REFERENCES setor(id) ON DELETE CASCADE, 
+    product_id INTEGER REFERENCES produk(id), 
+    kuantitas NUMERIC(10, 2) NOT NULL, 
+    harga_saat_transaksi NUMERIC(10, 2) NOT NULL 
+);
+
+create table riwayat_setor(
+    id serial primary key,
+    user_id integer references users(id) on delete cascade,
+    total_berat numeric not null,
+    total_harga numeric not null,
+    tanggal_setor timestamp default now()
+);
+
+create table riwayat_penarikan(
+    id serial primary key,
+    user_id integer references users(id) on delete cascade,
+    jumlah_penarikan numeric not null,
+    tanggal_penarikan timestamp default now()
+);
