@@ -11,6 +11,8 @@ import beritaRoutes from '../src/routes/beritaRoutes.js';
 import lokasiRoutes from '../src/routes/lokasiRoutes.js';
 import setorRoutes from '../src/routes/setorRoutes.js';
 import detailSetorRoutes from '../src/routes/detailSetorRoutes.js';
+import riwayatSetorRoutes from '../src/routes/riwayatSetorRoutes.js';
+import riwayatPenarikanRoutes from '../src/routes/riwayatPenarikanRoutes.js';
 
 dotenv.config();
 
@@ -30,6 +32,8 @@ app.use('/api/berita', beritaRoutes);
 app.use('/api/lokasi', lokasiRoutes);
 app.use('/api/setor', setorRoutes);
 app.use('/api/detail-setor', detailSetorRoutes);
+app.use('/api/riwayat-setor', riwayatSetorRoutes);
+app.use('/api/riwayat-penarikan', riwayatPenarikanRoutes);
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'Serverless API ready' });

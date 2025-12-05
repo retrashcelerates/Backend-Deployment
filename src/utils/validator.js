@@ -1,3 +1,4 @@
+// Validasi User, Auth, dan Profile
 export const validatePassword = (password) => {
   const errors = [];
 
@@ -166,6 +167,8 @@ export const validateAddress = (address) => {
   return errors;
 };
 
+
+// Validasi Produk 
 export const validateProductName = (nama_produk) => {
   const errors = [];
 

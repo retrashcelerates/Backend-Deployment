@@ -63,3 +63,17 @@ CREATE TABLE detail_setor (
     harga_saat_transaksi NUMERIC(10, 2) NOT NULL 
 );
 
+create table riwayat_setor(
+    id serial primary key,
+    user_id integer references users(id) on delete cascade,
+    total_berat numeric not null,
+    total_harga numeric not null,
+    tanggal_setor timestamp default now()
+);
+
+create table riwayat_penarikan(
+    id serial primary key,
+    user_id integer references users(id) on delete cascade,
+    jumlah_penarikan numeric not null,
+    tanggal_penarikan timestamp default now()
+);
