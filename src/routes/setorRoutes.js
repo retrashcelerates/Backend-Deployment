@@ -1,6 +1,14 @@
 import express from 'express';
-import { createNewSetor, getSetorList, getSetorDetail, getSetorByUser, updateSetorData, deleteSetorData } from '../controller/setorController.js';
+import {
+  createNewSetor,
+  getSetorList,
+  getSetorDetail,
+  getSetorByUser,
+  updateSetorData,
+  deleteSetorData,
+} from '../controller/setorController.js';
 import { authenticate } from '../middleware/auth.js';
+import { upload, uploadToCloudinary } from '../middleware/upload.js';
 
 const router = express.Router();
 
@@ -11,7 +19,13 @@ const isAdmin = (req, res, next) => {
   next();
 };
 
-router.post('/', authenticate, createNewSetor);
+router.post(
+  '/',
+  authenticate,
+  upload.single('image'),      
+  uploadToCloudinary,         
+  createNewSetor
+);
 router.get('/', authenticate, isAdmin, getSetorList);
 router.get('/user/:user_id', authenticate, getSetorByUser);
 router.get('/:id', authenticate, getSetorDetail);

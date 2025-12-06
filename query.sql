@@ -50,25 +50,13 @@ CREATE TABLE lokasi (
 CREATE TABLE setor ( 
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    lokasi_id INTEGER REFERENCES lokasi(id), 
+    product_id INTEGER REFERENCES produk(id), 
+    lokasi_id INTEGER REFERENCES lokasi(id),
+    harga_saat_transaksi NUMERIC(10,2) NOT NULL DEFAULT 0,
+    kuantitas NUMERIC(10,2) NOT NULL DEFAULT 0,
+    gambar_url TEXT, 
     catatan_tambahan TEXT, 
     tanggal_setor TIMESTAMP DEFAULT NOW()
-);
-
-CREATE TABLE detail_setor (
-    id SERIAL PRIMARY KEY,
-    setor_id INTEGER REFERENCES setor(id) ON DELETE CASCADE, 
-    product_id INTEGER REFERENCES produk(id), 
-    kuantitas NUMERIC(10, 2) NOT NULL, 
-    harga_saat_transaksi NUMERIC(10, 2) NOT NULL 
-);
-
-create table riwayat_setor(
-    id serial primary key,
-    user_id integer references users(id) on delete cascade,
-    total_berat numeric not null,
-    total_harga numeric not null,
-    tanggal_setor timestamp default now()
 );
 
 create table riwayat_penarikan(
