@@ -59,9 +59,14 @@ CREATE TABLE setor (
     tanggal_setor TIMESTAMP DEFAULT NOW()
 );
 
-create table riwayat_penarikan(
-    id serial primary key,
-    user_id integer references users(id) on delete cascade,
-    jumlah_penarikan numeric not null,
-    tanggal_penarikan timestamp default now()
+CREATE TABLE riwayat_penarikan (
+  id                SERIAL PRIMARY KEY,
+  user_id           INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  jumlah_penarikan  NUMERIC NOT NULL,
+  tanggal_penarikan TIMESTAMP DEFAULT NOW(),
+  metode_penarikan  VARCHAR(50) NOT NULL,
+  saldo_setelah     NUMERIC NOT NULL,
+  catatan           TEXT,
+  kode_transaksi    VARCHAR(50) NOT NULL UNIQUE
 );
+
