@@ -20,4 +20,4 @@ router.post('/', authenticate, isAdmin, upload.single('image'), uploadToCloudina
 router.put('/:id', authenticate, isAdmin, upload.single('image'), uploadToCloudinary, updateProdukData);
 router.delete('/:id', authenticate, isAdmin, deleteProdukData);
 
-export default router;
+export default router;  

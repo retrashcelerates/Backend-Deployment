@@ -44,6 +44,7 @@ CREATE TABLE lokasi (
     kecamatan VARCHAR(100),
     kabupaten VARCHAR(100),
     kodepos VARCHAR(10),
+    image_url TEXT,
     created_at TIMESTAMP DEFAULT NOW()
 );
 
